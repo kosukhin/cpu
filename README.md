@@ -7,7 +7,7 @@
 трансформации одних моделей в другие.
 
 Видео, которое подтолкнуло к идее:
-https://youtu.be/ZhuHCtR3xq8?si=4EPTl2H7r_wyKcRI
+<video src='https://youtu.be/ZhuHCtR3xq8?si=4EPTl2H7r_wyKcRI' width=180/>
 
 ## Суть идеи
 
