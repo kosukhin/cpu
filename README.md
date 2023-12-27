@@ -22,7 +22,8 @@
 
 ## Схема
 
-![image](https://github.com/kosukhin/i-spec/assets/109918884/e54a686f-5a93-49f6-b7a1-7f3ee9cac8af)
+![image](https://github.com/kosukhin/i-spec/assets/109918884/72487054-b934-4297-881d-5e11ce7d9882)
+
 
 ## Примеры
 
