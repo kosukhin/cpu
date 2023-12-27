@@ -41,6 +41,7 @@ async function request(model: Request) {
   // do request
 }
 
+// В контроллере
 const result = await request({
   method: 'GET',
   url: '/hello/world',
@@ -63,9 +64,18 @@ function renderScene(model: Scene) {
   // do rendering
 }
 
+// В контроллере
 renderScene({
   floorTexture: '/floor.jpeg',
   floorSize: [200, 200],
   skyColor: 'blue'
 })
+
+// В сервисе
+function resolveSkyColor(model: Scene) {
+  return {
+    ...model,
+    skyColor: 'red',
+  }
+}
 ```
