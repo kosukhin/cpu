@@ -1,34 +1,64 @@
 # i-spec
 
 ## Что подтолкнуло к идее?
--- Видос с беком --
 
-## Состоит из двух функций
+Общий смысл подхода заключается в том чтобы вытащить бизнес логику
+приложения на уровень данных. И чтобы бизнес-операции превратились в операции
+трансформации одних моделей в другие.
 
-Идея состоит всего лишь из двух функций на
-TypeScript, Одна функция создает фабрику для
-моделей, вторая функция используя созданную фабрику
-реализует эффект, который можно выполнить от переданной
-модели.
+Видео, которое подтолкнуло к идее:
+
+## Суть идеи
+
+Первое - логика строиться на основе данных (моделей). Бизнес процесс опистывается
+моделью - объектом.
+
+Второе - к модели-объекту может быть привязан эффект - функция, выполняющая ввод-вывод.
+
+Принципиально это всё, два правила которые позволяют описывать
+бизнес процесс на уровне данных а не на уровне операций.
+
+## Примеры
+
+### Запрос Request
 
 ```ts
-export const defineModelFactory = <T,>() => <D extends Partial<T>>(defaults?: D) => {
-  return (
-    required?: Omit<T, keyof D> & Partial<D>,
-    changed?: Partial<T>
-  ): Readonly<T> => {
-    return Object.freeze({
-      ...defaults,
-      ...required,
-      ...changed
-    } as T)
-  }
+type Request = {
+  method: string,
+  url: string,
+  params: Record<string, string>
+  body: any
 }
 
-export const defineModelEffect = <R extends any = '__R__',>() => <T extends (...args: any[]) => any>(modelFactory: T, fn: (model: ReturnType<T>) => R extends '__R__' ? ReturnType<T> : R) => {
-  return <CR = '__CR__'>(...args: Parameters<T>) => {
-    const model = modelFactory(...args);
-    return fn(model) as CR extends '__CR__' ? (R extends '__R__' ? ReturnType<T> : R) : CR
-  }
+async function request(model: Request) {
+  // do request
 }
+
+const result = await request({
+  method: 'GET',
+  url: '/hello/world',
+  params: {
+    test: 'me'
+  }
+})
+```
+
+### Сцена игры
+
+```ts
+type Scene = {
+  floorTexture: string,
+  floorSize: [number, number],
+  skyColor: string,
+}
+
+function renderScene(model: Scene) {
+  // do rendering
+}
+
+renderScene({
+  floorTexture: '/floor.jpeg',
+  floorSize: [200, 200],
+  skyColor: 'blue'
+})
 ```
