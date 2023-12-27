@@ -104,13 +104,13 @@ class Request {
 }
 
 // В контроллере
-const result = await new Request({
-  method: 'GET',
-  url: '/hello/world',
-  params: {
+const result = await new Request(
+  'GET',
+  '/hello/world',
+  {
     test: 'me'
   }
-}).do()
+).do()
 ```
 
 ### Сцена игры
@@ -128,22 +128,16 @@ class Scene {
   }
 }
 
-function renderScene(model: Scene) {
-  // do rendering
-}
-
 // В контроллере
-renderScene({
-  floorTexture: '/floor.jpeg',
-  floorSize: [200, 200],
-  skyColor: 'blue'
-})
+new Scene(
+  '/floor.jpeg',
+  [200, 200],
+  'blue'
+).render();
 
 // В сервисе
 function resolveSkyColor(model: Scene) {
-  return {
-    ...model,
-    skyColor: 'red',
-  }
+  model.skyColor = 'red'
+  return return model;
 }
 ```
