@@ -84,3 +84,66 @@ function resolveSkyColor(model: Scene) {
 
 ТК в JS есть классы, то можно объединить модель и ее эффекты внутри одного класса.
 В каком-то смысле это даже упростит код и не нарушит идею.
+
+## Примеры
+
+### Запрос Request
+
+```ts
+class Request {
+  constructor(    
+    method: string,
+    url: string,
+    params: Record<string, string>
+    body: any
+  ) {}
+
+  do() {
+    // do request
+  }
+}
+
+// В контроллере
+const result = await new Request({
+  method: 'GET',
+  url: '/hello/world',
+  params: {
+    test: 'me'
+  }
+}).do()
+```
+
+### Сцена игры
+
+```ts
+class Scene {
+  constructor(
+    floorTexture: string,
+    floorSize: [number, number],
+    skyColor: string,
+  ) {}
+
+  render() {
+    // do rendering
+  }
+}
+
+function renderScene(model: Scene) {
+  // do rendering
+}
+
+// В контроллере
+renderScene({
+  floorTexture: '/floor.jpeg',
+  floorSize: [200, 200],
+  skyColor: 'blue'
+})
+
+// В сервисе
+function resolveSkyColor(model: Scene) {
+  return {
+    ...model,
+    skyColor: 'red',
+  }
+}
+```
