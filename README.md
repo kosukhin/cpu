@@ -18,6 +18,18 @@ const useAddresses = (
 }
 ```
 В случае функционального стиля кода в composables можно хранить функции-композиции в виде цепочки Монад или цепочки Промисов.
+```js
+pipe(
+  some(game),
+  chain(ensureNotGameOver),
+  chain(ensureNotPaused),
+  chain(ensureShapeInBoundsByYAxis(currentShoot)),
+  map(moveShapeToDirection(currentShoot)),
+  map(checkEnemyShooted(currentShoot)),
+  tap(removeShootIfStopped(currentShoot, game)),
+  repeat(50)
+).do()
+```
 
 # Providers
 
